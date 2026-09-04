@@ -1,0 +1,17 @@
+name = "yusando-jas"
+main = "src/worker.js"
+compatibility_date = "2025-06-01"
+compatibility_flags = ["nodejs_compat"]
+
+[assets]
+directory = "./public"
+binding = "ASSETS"
+run_worker_first = ["/api/*"]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "yusando-jas"
+database_id = "7fa0a30a-d63d-47dd-8312-e633b69481b7"
+
+[observability]
+enabled = true
