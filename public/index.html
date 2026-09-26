@@ -380,6 +380,71 @@ p.secsub .en{display:block;color:var(--faint)}
 .member{font-size:11px;color:var(--muted);white-space:nowrap}
 @media (max-width:420px){.sealsum{grid-template-columns:repeat(2,1fr)}}
 
+
+/* ---- application print / PDF ---- */
+.ovapp{display:flex;align-items:center;justify-content:space-between;gap:20px}
+.ovappbtns{display:flex;gap:10px;flex:0 0 auto}
+.pview{position:fixed;inset:0;z-index:90;background:var(--surface2);overflow:auto;padding:0 0 40px}
+.ptools{
+  position:sticky;top:0;z-index:2;display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  padding:12px 20px;background:var(--surface);border-bottom:1px solid var(--line);box-shadow:var(--shadow);
+}
+.pvtitle{flex:1 1 200px;line-height:1.35}
+.pvtitle .ja{display:block;font-weight:700;font-size:15px}
+.pvtitle .en{display:block;font-size:12px;color:var(--muted)}
+.ptools select{width:auto;padding:8px 10px}
+.pvopt{display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--muted);cursor:pointer}
+.pvopt input{width:auto}
+.pvcount{font-size:12px;color:var(--faint);font-family:"IBM Plex Mono",monospace}
+.pvhint{max-width:297mm;margin:14px auto 0;padding:0 16px;font-size:12.5px;color:var(--muted);line-height:1.7}
+.pvhint .en{display:block;color:var(--faint)}
+.pdoc{padding:10px 16px}
+.page{
+  width:297mm;min-height:210mm;margin:14px auto;padding:12mm 13mm;background:#fff;color:#111;
+  box-shadow:0 2px 10px rgba(0,0,0,.18);font-family:"Noto Sans JP",sans-serif;font-size:9.5pt;line-height:1.5;
+  position:relative;overflow:hidden;
+}
+.page *{color:#111}
+.fhead{display:flex;align-items:stretch;gap:0;margin-bottom:5mm;border:1.2pt solid #111}
+.fcode{
+  flex:0 0 28mm;display:flex;align-items:center;justify-content:center;border-right:1.2pt solid #111;
+  font-family:"Shippori Mincho",serif;font-size:15pt;font-weight:600;letter-spacing:.1em;
+}
+.ftitle{flex:1;display:flex;align-items:center;padding:2.5mm 5mm;font-family:"Shippori Mincho",serif;font-size:14pt;font-weight:600;letter-spacing:.08em}
+.fmeta{flex:0 0 auto;display:grid;grid-template-columns:auto auto;align-content:center;column-gap:3mm;padding:2mm 4mm;border-left:1pt solid #111;font-size:8.5pt}
+.fmeta dt{color:#555}.fmeta dd{margin:0;font-weight:700}
+.fsec{margin:4mm 0 2mm;font-weight:700;font-size:10pt}
+.fnote{font-size:8pt;color:#444;margin:2mm 0 0}
+table.ft{width:100%;border-collapse:collapse;table-layout:fixed}
+table.ft th,table.ft td{border:.7pt solid #111;padding:1.4mm 1.8mm;vertical-align:middle;word-break:break-all}
+table.ft th{background:#EEF1EC;font-weight:700;font-size:8.5pt;text-align:center}
+table.ft td.c{text-align:center}
+table.ft td.n{text-align:right;font-variant-numeric:tabular-nums;font-family:"IBM Plex Mono",monospace}
+table.ft td.hist{height:34mm;vertical-align:top;font-size:8pt;line-height:1.45;padding:1.2mm}
+table.ft td.plan{height:26mm;vertical-align:top;font-size:8pt;line-height:1.45;padding:1.2mm;color:#555}
+table.ft td.blank{height:8mm}
+table.ft tr.tot td{font-weight:700;background:#F6F7F4}
+.pfoot{position:absolute;left:13mm;right:13mm;bottom:6mm;display:flex;justify-content:space-between;font-size:7.5pt;color:#666}
+.pfoot *{color:#666}
+.cover h1{font-family:"Shippori Mincho",serif;font-size:22pt;font-weight:600;margin:6mm 0 2mm;letter-spacing:.08em}
+.cover .sub{font-size:10.5pt;color:#444;margin:0 0 8mm}
+.cover dl{display:grid;grid-template-columns:40mm 1fr;gap:2.5mm 6mm;margin:0 0 8mm;font-size:11pt}
+.cover dt{color:#555}.cover dd{margin:0;font-weight:700}
+.cover .cols{display:grid;grid-template-columns:1fr 1fr;gap:10mm}
+.cover ul{margin:0;padding-left:5mm}
+.cover li{margin:1mm 0}
+.cover .warn li{color:#7a4a0c}
+@media print{
+  @page{size:A4 landscape;margin:0}
+  html,body{background:#fff!important}
+  body>*:not(#printView){display:none!important}
+  #printView{position:static;display:block!important;overflow:visible;background:#fff;padding:0}
+  .ptools,.pvhint{display:none!important}
+  .pdoc{padding:0}
+  .page{margin:0;box-shadow:none;break-after:page;page-break-after:always;height:210mm;min-height:0}
+  .page:last-child{break-after:auto;page-break-after:auto}
+  table.ft th,table.ft tr.tot td{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
 /* ---- desktop ---- */
 .ti,.navgroup,.navfoot,.pagehead{display:none}
 @media (min-width:1024px){
@@ -643,6 +708,16 @@ p.secsub .en{display:block;color:var(--faint)}
         <p class="secsub">継続申請書のA-Jと同じ並びです。空いているマスは作業記録がない月です。<span class="en">Laid out like form A-J. An empty cell is a month with no work recorded.</span></p>
         <div class="hmwrap" id="ovHeat"></div>
         <div class="hmlegend" id="ovLegend"></div>
+      </div>
+      <div class="card ovwide ovapp">
+        <div>
+          <h3 class="sec"><span class="ja">継続申請書を書き出す</span><span class="en">Renewal application</span></h3>
+          <p class="secsub" style="margin:0">選んでいる年度の記録から、A-C・A-G・A-J と加工の書類を申請書の体裁で作ります。<span class="en">Builds forms A-C, A-G, A-J and the processing sheets for the selected year.</span></p>
+        </div>
+        <div class="ovappbtns">
+          <button class="btn primary" type="button" id="ovPrint"><span class="ja">PDFで書き出す</span><span class="en">Save as PDF</span></button>
+          <button class="btn" type="button" id="ovXlsx"><span class="ja">Excel</span><span class="en">Export .xlsx</span></button>
+        </div>
       </div>
       <div class="card">
         <h3 class="sec"><span class="ja">申請前に確認すること</span><span class="en">Check before applying</span></h3>
@@ -1042,7 +1117,8 @@ p.secsub .en{display:block;color:var(--faint)}
       </div>
       <div id="appCheck"></div>
       <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
-        <button class="btn primary" id="exportApp"><span class="ja">継続申請書(下書き)を書き出す</span><span class="en">Export the application draft</span></button>
+        <button class="btn primary" id="printApp"><span class="ja">申請書をPDFで書き出す</span><span class="en">Preview &amp; save as PDF</span></button>
+        <button class="btn" id="exportApp"><span class="ja">Excelで書き出す(下書き)</span><span class="en">Export as Excel</span></button>
       </div>
       <p class="hint">押印・講習会番号・出荷先(A-I)・種苗(A-K/L/M)など、記録から作れない欄は空のままです。書き出したあとに確認して埋めてください。<span class="en">Seals, training certificate numbers, buyers (A-I) and seed and seedling sheets (A-K/L/M) cannot come from the records and are left blank — fill them in after exporting.</span></p>
     </div>
@@ -1057,6 +1133,18 @@ p.secsub .en{display:block;color:var(--faint)}
 </div>
 </div>
 <div class="toast" id="toast"></div>
+<div class="pview hidden" id="printView" role="dialog" aria-modal="true" aria-labelledby="pvTitle">
+  <div class="ptools">
+    <div class="pvtitle" id="pvTitle"><span class="ja">継続申請書 プレビュー</span><span class="en">Application preview</span></div>
+    <select id="pvYear" aria-label="申請年度"></select>
+    <label class="pvopt"><input type="checkbox" id="pvProc" checked> <span>加工の書類も入れる / Include processing</span></label>
+    <span class="pvcount" id="pvCount"></span>
+    <button class="btn primary" type="button" id="pvPrint"><span class="ja">PDFで保存・印刷</span><span class="en">Save as PDF / Print</span></button>
+    <button class="btn" type="button" id="pvClose"><span class="ja">閉じる</span><span class="en">Close</span></button>
+  </div>
+  <p class="pvhint">「PDFで保存・印刷」を押し、送信先(プリンター)で<strong>「PDFに保存」</strong>を選んでください。用紙はA4横です。<span class="en">Press “Save as PDF / Print”, then choose “Save as PDF” as the destination. Paper: A4 landscape.</span></p>
+  <div id="printDoc" class="pdoc"></div>
+</div>
 
 <script>
 (function(){
@@ -3550,6 +3638,189 @@ document.getElementById("ovAll").onclick=function(){showView("list");};
   });
   heat.addEventListener("mouseleave",function(){tip.classList.remove("on");});
 })();
+
+/* ---------- application: print / PDF ----------
+   The same data as the Excel draft, laid out as A4 landscape forms.
+   The browser's own print dialog turns it into a PDF ("Save as PDF"). */
+function pesc(s){return xmlEsc(s==null?"":s);}
+function chunks(a,n){var o=[];for(var i=0;i<a.length;i+=n)o.push(a.slice(i,i+n));return o.length?o:[[]];}
+function kgStr(n){return n>0?fmtKg(n):"";}
+function formHead(code,title,extra){
+  var meta='<dl class="fmeta"><dt>生産行程管理者</dt><dd>'+pesc(APP_ORG)+'</dd><dt>認定番号</dt><dd>'+pesc(APP_CERT)+'</dd>'+(extra||"")+'</dl>';
+  return '<div class="fhead"><div class="fcode">'+pesc(code)+'</div><div class="ftitle">'+pesc(title)+'</div>'+meta+'</div>';
+}
+function yearLabel(y){return y+"年度（"+(y-1)+"年10月〜"+y+"年9月）";}
+function pageHtml(inner,label,cls){
+  return '<section class="page'+(cls?" "+cls:"")+'">'+inner+
+    '<div class="pfoot"><span>'+pesc(label)+'</span><span class="pno"></span></div></section>';
+}
+function coverPage(year,withProc){
+  var iss=appIssues(year),data=appData(year),tot=0;data.forEach(function(d){tot+=d.total;});
+  var inc=["A-C 申請圃場の一覧","A-G 生産行程に使用する全ての機械","A-J 申請圃場の栽培履歴と計画書（"+data.length+"圃場）"];
+  if(withProc)inc.push("加工：工程フロー・記録一覧・原料受入・施設と設備・洗浄切替記録・格付小分け");
+  var hand=["A-申請：担当者名と押印、講習会の受講日と修了証番号","A-I：格付品目の出荷先、JASマーク包材",
+    "A-K / A-L / A-M：種子・苗・育苗","A-N / A-O：投入資材・農薬（使用なしのチェック）"];
+  var x='<div class="cover"><h1>有機JAS 継続申請書（下書き）</h1>'+
+    '<p class="sub">悠三堂 有機JAS記録から自動で作成しました。提出前に内容を確認してください。</p>'+
+    '<dl><dt>生産行程管理者名</dt><dd>'+pesc(APP_ORG)+'</dd><dt>認定番号</dt><dd>'+pesc(APP_CERT)+'</dd>'+
+    '<dt>住所</dt><dd>'+pesc(APP_ZIP+" "+APP_ADDR)+'</dd><dt>申請年度</dt><dd>'+pesc(yearLabel(year))+'</dd>'+
+    '<dt>申請圃場 / 年間収穫量</dt><dd>'+data.length+' 圃場 ／ '+fmtKg(tot)+' kg</dd>'+
+    '<dt>作成日</dt><dd>'+pesc(today())+'</dd></dl>'+
+    '<div class="cols"><div><p class="fsec">この書類に入っているもの</p><ul>'+
+    inc.map(function(t){return "<li>"+pesc(t)+"</li>";}).join("")+'</ul>'+
+    '<p class="fsec">記録から作れないので、手で埋めるもの</p><ul>'+
+    hand.map(function(t){return "<li>"+pesc(t)+"</li>";}).join("")+'</ul></div>'+
+    '<div><p class="fsec">確認したほうがよい点（'+iss.length+'件）</p><ul class="warn">'+
+    (iss.length?iss.slice(0,18).map(function(t){return "<li>"+pesc(t.ja)+"</li>";}).join("")
+      +(iss.length>18?"<li>…ほか "+(iss.length-18)+" 件</li>":""):"<li style='color:#111'>特にありません</li>")+
+    '</ul></div></div></div>';
+  return pageHtml(x,"表紙 / Cover");
+}
+function acPage(year){
+  var data=appData(year),tot=0,rows=[];
+  data.forEach(function(d){
+    tot+=d.total;
+    rows.push('<tr><td class="c">'+d.no+'</td><td>'+pesc(d.field.ja)+'</td><td>'+pesc(d.field.en||"")+'</td><td>'+pesc(d.field.addr||"")+
+      '</td><td class="n">'+pesc(d.field.area||"")+'</td><td class="c">'+pesc(d.field.since||"")+'</td><td class="n">'+kgStr(d.total)+'</td></tr>');
+  });
+  for(var i=data.length;i<12;i++)rows.push('<tr><td class="blank"></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>');
+  var parts=chunks(rows,14);
+  return parts.map(function(part,pi){
+  var last=pi===parts.length-1;
+  var x=formHead("Ａ－Ｃ","申請圃場の一覧",'<dt>申請年度</dt><dd>'+year+'年度</dd>')+
+    '<table class="ft"><colgroup><col style="width:9mm"><col style="width:32mm"><col style="width:32mm"><col><col style="width:18mm"><col style="width:24mm"><col style="width:28mm"></colgroup>'+
+    '<thead><tr><th>№</th><th>通称名</th><th>英語表記</th><th>所在地</th><th>面積(a)</th><th>有機管理開始</th><th>年間収穫量(kg)</th></tr></thead><tbody>'+part.join("")+
+    (last?'<tr class="tot"><td></td><td>合計</td><td></td><td></td><td></td><td></td><td class="n">'+fmtKg(tot)+'</td></tr>':"")+'</tbody></table>'+
+    (last?"":'<p class="fnote">次のページに続きます</p>');
+  return pageHtml(x,"A-C 申請圃場の一覧");
+  }).join("");
+}
+function agPage(){
+  var rows=[];
+  store.machines.forEach(function(m,i){
+    rows.push('<tr><td class="c">'+(i+1)+'</td><td>'+pesc(m.ja)+(m.en?'<br><span style="font-size:7.5pt;color:#555">'+pesc(m.en)+'</span>':"")+
+      '</td><td class="c">'+pesc(m.n||"")+'</td><td class="c">個 ・ 共 ・ 借</td><td class="c">'+(m.shared?"有機以外併用":"有機専用")+
+      '</td><td>'+pesc(CLEAN[m.ja]||"")+'</td><td class="c">有 ・ 無</td></tr>');
+  });
+  return chunks(rows,12).map(function(part){
+  var x=formHead("Ａ－Ｇ","生産行程に使用する全ての機械")+
+    '<p class="fsec">1. 生産行程（農作業、調製作業、出荷）に使用する全ての機械</p>'+
+    '<table class="ft"><colgroup><col style="width:9mm"><col style="width:52mm"><col style="width:16mm"><col style="width:30mm"><col style="width:28mm"><col><col style="width:24mm"></colgroup>'+
+    '<thead><tr><th>№</th><th>種別</th><th>所有数</th><th>個人・共同・借用</th><th>有機専用／併用</th><th>清掃又は洗浄方法</th><th>清掃記録</th></tr></thead><tbody>'+part.join("")+'</tbody></table>'+
+    '<p class="fnote">「個・共・借」「有・無」は該当するものに○をつけてください。</p>';
+  return pageHtml(x,"A-G 機械");
+  }).join("");
+}
+function ajPage(d,year){
+  var months=d.months,next=appMonths(year+1);
+  var yr=function(ms){
+    var out="",i=0;
+    while(i<ms.length){var y=ms[i].y,n=0;while(i+n<ms.length&&ms[i+n].y===y)n++;out+='<th colspan="'+n+'">'+y+'年</th>';i+=n;}
+    return out;
+  };
+  var hist=d.cells.map(function(c){
+    return '<td class="hist">'+pesc(c.text?c.text.split("&").join("\n"):"").replace(/\n/g,"<br>")+
+      (c.material.length?'<br><b>資材:</b>'+pesc(c.material.join("、")):"")+'</td>';
+  }).join("");
+  var kg=d.cells.map(function(c){return '<td class="n">'+kgStr(c.kg)+'</td>';}).join("");
+  var plan=d.cells.map(function(c){return '<td class="plan">'+pesc(c.text?c.text.split("&").join("\n"):"").replace(/\n/g,"<br>")+'</td>';}).join("");
+  var cg='<colgroup><col style="width:20mm">'+months.map(function(){return "<col>";}).join("")+'<col style="width:24mm"></colgroup>';
+  var x=formHead("Ａ－Ｊ","申請圃場の栽培履歴と計画書",'<dt>申請年度</dt><dd>'+year+'年度</dd>')+
+    '<table class="ft" style="margin-bottom:3mm"><colgroup><col style="width:24mm"><col style="width:18mm"><col style="width:24mm"><col style="width:18mm"><col style="width:24mm"><col></colgroup><tr>'+
+    '<th>A-Cの№</th><td class="c">'+d.no+'</td><th>圃場番号</th><td class="c">'+pesc(d.field.id)+'</td><th>通称名</th><td>'+pesc(d.field.ja)+(d.field.en?"　"+pesc(d.field.en):"")+
+    (d.field.addr?'　<span style="font-size:8pt;color:#555">'+pesc(d.field.addr)+'</span>':"")+'</td></tr></table>'+
+    '<p class="fsec">1. 申請圃場栽培履歴</p>'+
+    '<table class="ft">'+cg+'<thead><tr><th rowspan="2">年／月</th>'+yr(months)+'<th rowspan="2">作付作物名</th></tr><tr>'+
+    months.map(function(m){return "<th>"+m.m+"月</th>";}).join("")+'</tr></thead><tbody>'+
+    '<tr><th>履歴</th>'+hist+'<td class="c" rowspan="2">茶</td></tr>'+
+    '<tr><th>収穫量(kg)</th>'+kg+'</tr>'+
+    '<tr class="tot"><td>年間合計</td><td colspan="'+months.length+'"></td><td class="n">'+kgStr(d.total)+' kg</td></tr></tbody></table>'+
+    '<p class="fsec">2. 申請圃場の栽培計画書（申請提出月より1年先まで）</p>'+
+    '<table class="ft">'+cg+'<thead><tr><th rowspan="2">年／月</th>'+yr(next)+'<th rowspan="2">作付作物名</th></tr><tr>'+
+    next.map(function(m){return "<th>"+m.m+"月</th>";}).join("")+'</tr></thead><tbody>'+
+    '<tr><th>計画</th>'+plan+'<td class="c">茶</td></tr></tbody></table>'+
+    '<p class="fnote">記号：播種→○ 定植→△ 基肥→基 追肥→追 農薬→農 収穫→□　／　計画は前年度の実績を写した下書きです。提出前に確認してください。</p>';
+  return pageHtml(x,"A-J "+d.field.ja);
+}
+/* processing sheets reuse the Excel builders: header on row 5, data below */
+function sheetPage(sh){
+  var c=sh.cells,cols=[],r,k,maxRow=5;
+  Object.keys(c).forEach(function(ref){
+    var m=/^([A-Z]+)(\d+)$/.exec(ref);if(!m)return;
+    var row=+m[2];if(row>maxRow)maxRow=row;
+    if(row===5&&cols.indexOf(m[1])<0)cols.push(m[1]);
+  });
+  cols.sort(function(a,b){return a.length-b.length||(a<b?-1:1);});
+  var head='<thead><tr>'+cols.map(function(cl){return "<th>"+pesc(c[cl+"5"])+"</th>";}).join("")+'</tr></thead>';
+  var body=[],notes="";
+  for(r=6;r<=maxRow;r++){
+    var cells=cols.map(function(cl){return c[cl+r];});
+    var filled=cells.filter(function(v){return v!==undefined&&v!=="";}).length;
+    if(!filled){
+      /* free text rows (notes) sit outside the table */
+      for(k in c){if(new RegExp("^[A-Z]+"+r+"$").test(k))notes+='<p class="fnote">'+pesc(c[k])+'</p>';}
+      continue;
+    }
+    if(filled===1&&cells[0]===undefined){notes+='<p class="fnote">'+pesc(cells.filter(function(v){return v!==undefined;})[0])+'</p>';continue;}
+    if(filled===1&&/^（|^※/.test(String(cells[0]))){notes+='<p class="fnote">'+pesc(cells[0])+'</p>';continue;}
+    if(filled===1){body.push('<tr><th colspan="'+cols.length+'" style="text-align:left">'+pesc(cells[0])+'</th></tr>');continue;}
+    body.push('<tr>'+cells.map(function(v){
+      var num=typeof v==="number";return '<td'+(num?' class="n"':"")+'>'+pesc(v===undefined?"":v)+'</td>';
+    }).join("")+'</tr>');
+  }
+  var sub=c.A2?'<p class="fnote" style="margin:0 0 2mm">'+pesc(c.A2)+'</p>':"";
+  var title=String(c.A1||sh.name).replace(/ \d{4}年度.*$/,"");
+  var parts=chunks(body,13);
+  return parts.map(function(part,pi){
+    var last=pi===parts.length-1;
+    var x=formHead("加工",title)+sub+
+      '<table class="ft">'+head+'<tbody>'+(part.length?part.join(""):'<tr><td colspan="'+cols.length+'" class="c blank">記録なし</td></tr>')+'</tbody></table>'+
+      (last?notes:'<p class="fnote">次のページに続きます</p>');
+    return pageHtml(x,sh.name+(parts.length>1?"（"+(pi+1)+"/"+parts.length+"）":""));
+  }).join("");
+}
+function buildApplicationDoc(year,withProc){
+  var pages=[coverPage(year,withProc),acPage(year),agPage()];
+  appData(year).forEach(function(d){pages.push(ajPage(d,year));});
+  if(withProc)[procFlowSheet(year),procListSheet(year),intakeSheet(year),facilitySheet(),cleanSheet(year),gradeSheet(year)]
+    .forEach(function(sh){pages.push(sheetPage(sh));});
+  var doc=document.getElementById("printDoc");
+  doc.innerHTML=pages.join("");
+  var ps=doc.querySelectorAll(".page .pno");
+  Array.prototype.forEach.call(ps,function(n,i){n.textContent=(i+1)+" / "+ps.length;});
+  document.getElementById("pvCount").textContent=ps.length+" ページ";
+}
+var pvPrevTitle=document.title;
+function openPrintView(year){
+  var sel=document.getElementById("pvYear");sel.textContent="";
+  appYears().forEach(function(y){var o=document.createElement("option");o.value=y;o.textContent=yearLabel(y);sel.appendChild(o);});
+  sel.value=year||appYears()[0];
+  buildApplicationDoc(parseInt(sel.value,10),document.getElementById("pvProc").checked);
+  document.getElementById("printView").classList.remove("hidden");
+  document.body.style.overflow="hidden";
+  document.getElementById("pvPrint").focus();
+}
+function closePrintView(){
+  document.getElementById("printView").classList.add("hidden");
+  document.body.style.overflow="";
+  document.title=pvPrevTitle;
+}
+function rebuildPrint(){buildApplicationDoc(parseInt(document.getElementById("pvYear").value,10),document.getElementById("pvProc").checked);}
+document.getElementById("pvYear").onchange=rebuildPrint;
+document.getElementById("pvProc").onchange=rebuildPrint;
+document.getElementById("pvClose").onclick=closePrintView;
+document.getElementById("pvPrint").onclick=function(){
+  /* the title becomes the suggested PDF file name */
+  document.title="悠三堂_有機JAS継続申請書_"+document.getElementById("pvYear").value+"年度";
+  window.print();
+  setTimeout(function(){document.title=pvPrevTitle;},1000);
+};
+document.addEventListener("keydown",function(e){
+  if(e.key==="Escape"&&!document.getElementById("printView").classList.contains("hidden"))closePrintView();
+});
+document.getElementById("printApp").onclick=function(){openPrintView(parseInt(document.getElementById("appYear").value,10));};
+document.getElementById("ovPrint").onclick=function(){openPrintView(parseInt(document.getElementById("ovYear").value,10));};
+document.getElementById("ovXlsx").onclick=function(){exportApplication(parseInt(document.getElementById("ovYear").value,10));};
 /* phones open on data entry, desktops on the overview */
 if(DESKTOP.matches)showView("overview");
 DESKTOP.addEventListener&&DESKTOP.addEventListener("change",function(){
