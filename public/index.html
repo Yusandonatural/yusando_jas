@@ -379,6 +379,204 @@ p.secsub .en{display:block;color:var(--faint)}
 #gateMsg{min-height:1.2em;color:var(--danger);font-weight:700}
 .member{font-size:11px;color:var(--muted);white-space:nowrap}
 @media (max-width:420px){.sealsum{grid-template-columns:repeat(2,1fr)}}
+
+/* ---- desktop ---- */
+.ti,.navgroup,.navfoot,.pagehead{display:none}
+@media (min-width:1024px){
+  :root{--side:264px}
+  body{
+    background:
+      radial-gradient(1100px 520px at 108% -8%,var(--accent-soft),transparent 62%),
+      radial-gradient(760px 420px at 30% 112%,var(--warn-soft),transparent 60%),
+      var(--bg);
+    background-attachment:fixed;
+  }
+  .app{max-width:none;margin:0;padding:0 0 120px var(--side)}
+
+  /* sidebar */
+  header{
+    position:fixed;top:0;left:0;bottom:0;width:var(--side);z-index:40;
+    display:flex;flex-direction:column;overflow-y:auto;
+    background:var(--surface);border-bottom:none;border-right:1px solid var(--line);
+  }
+  .bar{flex-direction:column;align-items:flex-start;gap:12px;padding:28px 22px 22px}
+  .brandmark{height:24px;margin-bottom:8px}
+  .brand .sub .ja{font-family:"Shippori Mincho","Hiragino Mincho ProN",serif;font-size:15px;color:var(--ink);letter-spacing:.06em}
+  .member{order:3;font-size:12px}
+  .member:empty{display:none}
+  .status{order:2}
+  .tabs{flex-direction:column;gap:2px;padding:4px 14px 20px;overflow:visible;flex:1}
+  .navgroup{
+    display:block;padding:18px 10px 6px;font-size:11px;font-weight:700;
+    color:var(--faint);letter-spacing:.08em;line-height:1.4;
+  }
+  .navgroup .en{margin-left:6px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;font-size:10.5px}
+  .tab{
+    display:grid;grid-template-columns:20px 1fr;align-items:center;column-gap:12px;
+    text-align:left;padding:9px 12px;border-bottom:none;border-radius:10px;
+    color:var(--muted);transition:background .18s,color .18s;position:relative;
+  }
+  .tab .ti{
+    display:block;grid-row:1/3;width:20px;height:20px;fill:none;stroke:currentColor;
+    stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;
+  }
+  .tab .ja{font-size:14px}
+  .tab .en{font-size:11.5px;color:var(--faint)}
+  .tab:hover{background:var(--surface2);color:var(--ink)}
+  .tab[aria-selected="true"]{background:var(--accent-soft);color:var(--accent-ink)}
+  .tab[aria-selected="true"] .en{color:var(--accent-ink);opacity:.8}
+  .tab[aria-selected="true"]::before{
+    content:"";position:absolute;left:-14px;top:9px;bottom:9px;width:3px;
+    border-radius:0 3px 3px 0;background:var(--accent);
+  }
+  .tab:focus-visible{outline-offset:2px;border-radius:10px}
+  .navfoot{
+    display:block;margin:0;padding:14px 22px 20px;border-top:1px solid var(--line);
+    font-size:11.5px;color:var(--faint);line-height:1.6;
+  }
+  .navfoot .en{display:block}
+  kbd{
+    font-family:"IBM Plex Mono",monospace;font-size:10.5px;padding:1px 6px;border-radius:5px;
+    background:var(--surface2);border:1px solid var(--line);border-bottom-width:2px;color:var(--muted);
+  }
+
+  /* content */
+  main{max-width:1120px;margin:0 auto;padding:40px 48px 24px}
+  .pagehead{display:block;margin:0 0 26px}
+  .eyebrow{
+    margin:0 0 6px;font-size:11.5px;font-weight:600;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--accent-ink);
+  }
+  .phtitle{margin:0;line-height:1.3;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+  .phtitle .ja{font-family:"Shippori Mincho","Hiragino Mincho ProN",serif;font-size:30px;font-weight:600;letter-spacing:.04em}
+  .phtitle .en{font-size:15px;font-weight:500;color:var(--muted)}
+  .phsub{margin:8px 0 0;max-width:68ch;font-size:13.5px;color:var(--muted);line-height:1.8}
+  .card{border-radius:18px;padding:26px 30px;margin-bottom:18px}
+
+  /* entry forms: label column + control column */
+  #view-entry .card>.field,#view-proc .card>.field,
+  #view-grade .card>.field,#view-clean .card>.field{
+    display:grid;grid-template-columns:200px minmax(0,1fr);column-gap:28px;
+    padding:18px 0;margin:0;border-bottom:1px solid var(--line);
+  }
+  #view-entry .card>.field:first-child,#view-proc .card>.field:first-child,
+  #view-grade .card>.field:first-child,#view-clean .card>.field:first-child{padding-top:4px}
+  #view-entry .card>.field:last-child,#view-proc .card>.field:last-child,
+  #view-grade .card>.field:last-child,#view-clean .card>.field:last-child{border-bottom:none;padding-bottom:4px}
+  .card>.field>*{grid-column:2}
+  .card>.field>.lb{grid-column:1;grid-row:1/span 6;margin:8px 0 0;align-self:start}
+  .card>.field>.lb .en{display:block;margin:2px 0 0}
+  .card>.field>.lb .opt{display:block;margin:4px 0 0}
+  .card>.field>input[type="date"],.card>.field>select{max-width:280px}
+  .chip{transition:background .15s,border-color .15s,transform .15s}
+  .chip:hover{border-color:var(--accent)}
+  .chip[aria-pressed="true"]:hover{filter:brightness(1.06)}
+  .btn{transition:background .15s,border-color .15s,filter .15s}
+  .btn:hover{border-color:var(--accent)}
+  .btn.primary:hover{filter:brightness(1.08)}
+  .btn.ghost:hover{color:var(--ink)}
+
+  /* registers: two columns */
+  #view-master{columns:2 440px;column-gap:18px}
+  #view-master>.note{column-span:all}
+  #view-master>.card{break-inside:avoid;display:inline-block;width:100%}
+
+  /* log */
+  #view-list{max-width:860px}
+  .log{border-radius:12px;padding:14px 18px;transition:border-color .15s,box-shadow .15s}
+  .log:hover{border-color:var(--line2);box-shadow:var(--shadow)}
+  .hsum{border-radius:18px;padding:20px 24px}
+
+  /* action bar */
+  .savebar{left:var(--side);padding:18px 48px 22px}
+  .savebar .inner{max-width:1024px;justify-content:flex-end}
+  .savebar .btn.primary{flex:0 0 auto;min-width:240px;border-radius:12px;box-shadow:0 8px 24px rgba(47,107,74,.28)}
+  .toast{left:calc(50% + var(--side)/2)}
+  .gatecard{border-radius:20px;padding:34px 32px;margin-top:14vh}
+}
+
+/* ---- overview (desktop only) ---- */
+.tab-over,.ng-over{display:none}
+@media (min-width:1024px){
+  .tabs .ng-over{display:block;order:0}.tabs .tab-over{display:grid;order:1}
+  .tabs .ng-rev{order:2}.tabs .tab-rev{order:3}
+  .tabs .ng-in{order:4}.tabs .tab-in{order:5}
+  .tabs .ng-in~.tab-in .ti{opacity:.85}
+  .ovtools{display:flex;align-items:center;gap:14px;margin:-8px 0 20px}
+  .ovtools .lb{margin:0;display:flex;gap:8px;align-items:baseline}
+  .ovtools .lb .en{margin:0}
+  .ovtools select{width:auto;min-width:260px;padding:8px 12px;border-radius:10px;background:var(--surface)}
+  .kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-bottom:18px}
+  .kpi{
+    background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px 22px;
+    box-shadow:var(--shadow);display:flex;flex-direction:column;gap:4px;min-width:0;
+  }
+  .kpi .k{font-size:12.5px;font-weight:700;color:var(--muted);line-height:1.4}
+  .kpi .k .en{display:block;font-weight:500;font-size:11.5px;color:var(--faint)}
+  .kpi .v{
+    font-family:"IBM Plex Mono",monospace;font-size:32px;font-weight:500;line-height:1.15;
+    font-variant-numeric:tabular-nums;color:var(--ink);margin-top:8px;
+  }
+  .kpi .v .u{font-size:14px;color:var(--muted);margin-left:4px}
+  .kpi .d{font-size:12px;color:var(--muted);line-height:1.6}
+  .kpi.hero{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+  .kpi.hero .k,.kpi.hero .k .en,.kpi.hero .v,.kpi.hero .v .u,.kpi.hero .d{color:var(--on-accent)}
+  .kpi.hero .k .en,.kpi.hero .d{opacity:.85}
+  .kpi .st{display:inline-flex;align-items:center;gap:6px;font-weight:700}
+  .kpi .st svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .kpi .st.ok{color:var(--accent-ink)}.kpi .st.warn{color:var(--warn)}.kpi .st.bad{color:var(--danger)}
+  .ovgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;align-items:start}
+  .ovgrid .card{margin:0}
+  .ovwide{grid-column:1/-1}
+  .hmwrap{overflow-x:auto;margin-top:6px}
+  table.hm{border-collapse:separate;border-spacing:3px;width:100%;table-layout:fixed;font-size:12px}
+  table.hm th{font-weight:700;color:var(--muted);text-align:center;padding:2px 0 6px;font-variant-numeric:tabular-nums}
+  table.hm th.f{text-align:left;width:170px;padding-right:10px}
+  table.hm th.f .ja{display:block;font-size:13px;color:var(--ink);font-weight:500;line-height:1.35}
+  table.hm th.f .en{display:block;font-size:11px;color:var(--faint);font-weight:400;line-height:1.3}
+  table.hm th.tot{width:84px;text-align:right}
+  table.hm td{height:38px;border-radius:6px;background:transparent;box-shadow:inset 0 0 0 1px var(--line2);cursor:default;position:relative}
+  table.hm td.w1,table.hm td.h1,table.hm td.h2,table.hm td.h3{box-shadow:none}
+  table.hm td.w1{background:color-mix(in srgb,var(--accent) 22%,var(--surface))}
+  table.hm td.h1{background:color-mix(in srgb,var(--accent) 45%,var(--surface))}
+  table.hm td.h2{background:color-mix(in srgb,var(--accent) 72%,var(--surface))}
+  table.hm td.h3{background:var(--accent)}
+  table.hm td.gap{background:repeating-linear-gradient(135deg,transparent 0 5px,var(--line) 5px 6px);box-shadow:none}
+  table.hm td:hover{outline:2px solid var(--ink);outline-offset:1px}
+  table.hm td.tot{
+    background:none;text-align:right;font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;
+    color:var(--ink);font-size:12.5px;padding-left:6px;
+  }
+  table.hm td.tot{box-shadow:none}
+  table.hm td.tot:hover{outline:none}
+  table.hm tr.un th.f .ja::after{content:" 未申請";font-size:10.5px;color:var(--warn);font-weight:700}
+  .hmlegend{display:flex;gap:18px;flex-wrap:wrap;margin-top:14px;font-size:12px;color:var(--muted)}
+  .hmlegend span{display:inline-flex;align-items:center;gap:7px}
+  .hmlegend i{width:16px;height:16px;border-radius:4px;display:inline-block;box-shadow:inset 0 0 0 1px var(--line2)}
+  .hmlegend i[class]{box-shadow:none}
+  .hmlegend i.w1{background:color-mix(in srgb,var(--accent) 22%,var(--surface))}
+  .hmlegend i.gap{background:repeating-linear-gradient(135deg,transparent 0 5px,var(--line) 5px 6px)}
+  .hmlegend i.h1{background:color-mix(in srgb,var(--accent) 45%,var(--surface))}
+  .hmlegend i.h2{background:color-mix(in srgb,var(--accent) 72%,var(--surface))}
+  .hmlegend i.h3{background:var(--accent)}
+  .hmtip{
+    position:fixed;z-index:60;pointer-events:none;opacity:0;transition:opacity .12s;
+    background:var(--ink);color:var(--bg);border-radius:10px;padding:8px 12px;font-size:12px;line-height:1.6;
+    max-width:300px;box-shadow:0 8px 24px rgba(0,0,0,.18);
+  }
+  .hmtip.on{opacity:1}
+  .hmtip b{display:block;font-size:12.5px}
+  .issue{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);font-size:13px;line-height:1.6}
+  .issue:last-child{border-bottom:none}
+  .issue svg{flex:0 0 18px;width:18px;height:18px;margin-top:2px;fill:none;stroke:var(--warn);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .issue.ok svg{stroke:var(--accent)}
+  .issue .en{display:block;font-size:12px;color:var(--faint)}
+  #ovRecent .log{margin-bottom:8px}
+}
+@media (min-width:1440px){
+  :root{--side:288px}
+  main{max-width:1200px;padding-top:52px}
+}
 </style>
 </head>
 <body>
@@ -412,16 +610,53 @@ p.secsub .en{display:block;color:var(--faint)}
     <span class="status" id="status"><span class="dot"></span><span id="statusText">…</span></span>
   </div>
   <div class="tabs" role="tablist">
-    <button class="tab" role="tab" aria-selected="true" data-view="entry"><span class="ja">栽培</span><span class="en">Field</span></button>
-    <button class="tab" role="tab" aria-selected="false" data-view="proc"><span class="ja">加工</span><span class="en">Processing</span></button>
-    <button class="tab" role="tab" aria-selected="false" data-view="grade"><span class="ja">格付</span><span class="en">Grading</span></button>
-    <button class="tab" role="tab" aria-selected="false" data-view="clean"><span class="ja">洗浄</span><span class="en">Cleaning</span></button>
-    <button class="tab" role="tab" aria-selected="false" data-view="list"><span class="ja">記録</span><span class="en">Log</span></button>
-    <button class="tab" role="tab" aria-selected="false" data-view="master"><span class="ja">台帳</span><span class="en">Registers</span></button>
+    <span class="navgroup ng-over" role="presentation"><span class="ja">全体を把握する</span><span class="en">Overview</span></span>
+    <button class="tab tab-over" role="tab" aria-selected="false" data-view="overview"><svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg><span class="ja">全体</span><span class="en">Overview</span></button>
+    <span class="navgroup ng-in" role="presentation"><span class="ja">入力する</span><span class="en">Enter · best on phone</span></span>
+    <button class="tab tab-in" role="tab" aria-selected="true" data-view="entry"><svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 20h10"/><path d="M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z"/><path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z"/></svg><span class="ja">栽培</span><span class="en">Field</span></button>
+    <button class="tab tab-in" role="tab" aria-selected="false" data-view="proc"><svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><path d="M6 2v2"/><path d="M10 2v2"/><path d="M14 2v2"/></svg><span class="ja">加工</span><span class="en">Processing</span></button>
+    <button class="tab tab-in" role="tab" aria-selected="false" data-view="grade"><svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg><span class="ja">格付</span><span class="en">Grading</span></button>
+    <button class="tab tab-in" role="tab" aria-selected="false" data-view="clean"><svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z"/><path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97"/></svg><span class="ja">洗浄</span><span class="en">Cleaning</span></button>
+    <span class="navgroup ng-rev" role="presentation"><span class="ja">見る・管理する</span><span class="en">Review &amp; manage</span></span>
+    <button class="tab tab-rev" role="tab" aria-selected="false" data-view="list"><svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/></svg><span class="ja">記録</span><span class="en">Log</span></button>
+    <button class="tab tab-rev" role="tab" aria-selected="false" data-view="master"><svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"/><path d="M8 7h6"/><path d="M8 11h8"/></svg><span class="ja">台帳</span><span class="en">Registers</span></button>
   </div>
+  <p class="navfoot">入力はスマホ、全体の確認はパソコンで。<span class="en">Enter on the phone, review on the desktop.</span>入力画面では <kbd>Ctrl</kbd>+<kbd>S</kbd> で記録<span class="en">Ctrl+S saves on entry screens</span></p>
 </header>
 
 <main>
+  <div class="pagehead" id="pagehead" aria-live="polite">
+    <p class="eyebrow en" id="phEyebrow"></p>
+    <h2 class="phtitle"><span class="ja" id="phJa"></span><span class="en" id="phEn"></span></h2>
+    <p class="phsub" id="phSub"></p>
+  </div>
+  <!-- ============ OVERVIEW (desktop) ============ -->
+  <section id="view-overview" class="hidden">
+    <div class="ovtools">
+      <label class="lb" for="ovYear"><span class="ja">申請年度</span><span class="en">Year (Oct–Sep)</span></label>
+      <select id="ovYear"></select>
+    </div>
+    <div class="kpis" id="ovKpis"></div>
+    <div class="ovgrid">
+      <div class="card ovwide">
+        <h3 class="sec"><span class="ja">圃場 × 月の記録</span><span class="en">Work by field and month</span></h3>
+        <p class="secsub">継続申請書のA-Jと同じ並びです。空いているマスは作業記録がない月です。<span class="en">Laid out like form A-J. An empty cell is a month with no work recorded.</span></p>
+        <div class="hmwrap" id="ovHeat"></div>
+        <div class="hmlegend" id="ovLegend"></div>
+      </div>
+      <div class="card">
+        <h3 class="sec"><span class="ja">申請前に確認すること</span><span class="en">Check before applying</span></h3>
+        <div id="ovIssues"></div>
+      </div>
+      <div class="card">
+        <h3 class="sec"><span class="ja">最近の記録</span><span class="en">Latest records</span></h3>
+        <div id="ovRecent"></div>
+        <button class="btn" type="button" id="ovAll" style="width:100%;margin-top:6px"><span class="ja">すべての記録を見る</span><span class="en">See all records</span></button>
+      </div>
+    </div>
+    <div class="hmtip" id="hmTip" role="tooltip"></div>
+  </section>
+
   <!-- ============ RECORD ============ -->
   <section id="view-entry">
     <div class="card">
@@ -1205,7 +1440,7 @@ function sync(){
       renderSeals();renderGrade();
     }
     if(d.now){lastSync=d.now;try{localStorage.setItem(KEY+"_since",String(lastSync));}catch(e){}}
-    if(changed){persist();renderList();}
+    if(changed){persist();renderList();if(currentView==="overview")renderOverview();}
   }).catch(function(){
     /* network trouble: leave everything queued, try again later */
   }).then(function(){syncing=false;setStatus();});
@@ -3139,8 +3374,9 @@ function toast(m){
 }
 var currentView="entry";
 function showView(v){
+  if(v==="overview"&&!DESKTOP.matches)v="entry";
   currentView=v;
-  ["entry","proc","grade","clean","list","master"].forEach(function(k){
+  ["overview","entry","proc","grade","clean","list","master"].forEach(function(k){
     document.getElementById("view-"+k).classList.toggle("hidden",k!==v);
   });
   Array.prototype.forEach.call(document.querySelectorAll(".tab"),function(t){
@@ -3154,8 +3390,179 @@ function showView(v){
   if(v==="clean")renderClean();
   if(v==="list")renderList();
   if(v==="master"){renderMaster();renderAppCard();}
+  if(v==="overview")renderOverview();
+  setPageHead(v);
   window.scrollTo(0,0);
 }
+function setPageHead(v){
+  var ph=PAGEHEAD[v];
+  document.getElementById("phEyebrow").textContent=ph[0];
+  document.getElementById("phJa").textContent=ph[1];
+  document.getElementById("phEn").textContent=ph[2];
+  document.getElementById("phSub").textContent=ph[3];
+}
+var PAGEHEAD={
+  overview:["Overview","全体の状況","At a glance","スマホで入力された記録を、年度ごとにまとめて見渡します。抜けや確認事項もここに出ます。"],
+  entry:["Field work","栽培の記録","Field log","畑でした作業・収穫量・使った資材を1件ずつ残します。"],
+  proc:["Processing","加工の記録","Processing log","製茶の工程ごとに、原料のロットと仕上がり量をつなげて残します。"],
+  grade:["Grading","格付の記録","Grading log","ロットを選んで確認項目を点検し、JASマークの貼付数を記録します。"],
+  clean:["Cleaning","洗浄・切替の記録","Cleaning log","有機以外と設備を共用したときの切替と洗浄を残します。"],
+  list:["All records","記録の一覧","Records","これまでの栽培・加工・格付・洗浄の記録を日付順に見られます。"],
+  master:["Registers","台帳","Registers","圃場・機械・工場・作業者・シールの台帳と、書き出し・同期の設定です。"]
+};
+setPageHead(currentView);
+
+/* ---------- overview (desktop) ---------- */
+var DESKTOP=window.matchMedia("(min-width:1024px)");
+var ICON_WARN='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>';
+var ICON_OK='<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>';
+function svgSpan(cls,svg,text){var e=el("span",cls);e.innerHTML=svg;e.appendChild(document.createTextNode(text));return e;}
+function kpi(cls,kJa,kEn,val,unit,detail){
+  var c=el("div","kpi"+(cls?" "+cls:""));
+  var k=el("div","k");k.appendChild(el("span",null,kJa));k.appendChild(el("span","en",kEn));c.appendChild(k);
+  var v=el("div","v");v.appendChild(el("span",null,val));if(unit)v.appendChild(el("span","u",unit));c.appendChild(v);
+  if(detail)c.appendChild(detail);
+  return c;
+}
+function renderOverview(){
+  var sel=document.getElementById("ovYear"),years=appYears(),cur=sel.value;
+  sel.textContent="";
+  years.forEach(function(y){
+    var o=document.createElement("option");o.value=y;
+    o.textContent=y+"年度（"+(y-1)+"年10月〜"+y+"年9月）";sel.appendChild(o);
+  });
+  if(cur&&years.indexOf(parseInt(cur,10))>-1)sel.value=cur;
+  var year=parseInt(sel.value,10)||years[0];
+  var inY=function(x){return !x.review&&inYear(x.date,year);};
+  var logs=store.logs.filter(inY),procs=store.procs.filter(inY),grades=store.grades.filter(inY),cleans=store.cleans.filter(inY);
+
+  /* KPIs */
+  var applied=0,unapplied=0;
+  logs.forEach(function(l){
+    var q=l.qtyByField||{};
+    Object.keys(q).forEach(function(id){var n=parseFloat(q[id]);if(isNaN(n))return;
+      if(isApplied(fieldOf(id)))applied+=n;else unapplied+=n;});
+  });
+  var graded=0;grades.forEach(function(g){if(g.result==="pass")graded+=parseFloat(g.qty)||0;});
+  var st=sealTotals(),pend=pending(),issues=appIssues(year);
+  var box=document.getElementById("ovKpis");box.textContent="";
+  var d1=el("div","d",unapplied?"未申請圃場 "+fmtKg(unapplied)+" kg は別集計 / "+fmtKg(unapplied)+" kg from unapplied fields kept apart":"格付対象の圃場のみ / Applied fields only");
+  box.appendChild(kpi("hero","年度の収穫量","Harvest this year",fmtKg(applied),"kg",d1));
+  var total=logs.length+procs.length+grades.length+cleans.length;
+  box.appendChild(kpi("","記録の件数","Records this year",String(total),"件",
+    el("div","d","栽培 "+logs.length+" · 加工 "+procs.length+" · 格付 "+grades.length+" · 洗浄 "+cleans.length)));
+  var sd=el("div","d");
+  sd.appendChild(st.bal<0?svgSpan("st bad",ICON_WARN,"残数が合いません / Does not reconcile")
+    :svgSpan("st ok",ICON_OK,"入荷 "+st.inn+" · 使用 "+st.used+" · 廃棄 "+st.bad));
+  box.appendChild(kpi("","JASシール残数","Seal balance",String(st.bal),"枚",sd));
+  var id4=el("div","d");
+  id4.appendChild(issues.length?svgSpan("st warn",ICON_WARN,"確認事項 "+issues.length+" 件 / "+issues.length+" to check")
+    :svgSpan("st ok",ICON_OK,"申請前チェックに問題なし / All clear"));
+  if(pend)id4.appendChild(el("div",null,"未同期 "+pend+" 件 / "+pend+" unsynced"));
+  box.appendChild(kpi("","格付済みの数量","Graded this year",fmtKg(graded),"kg",id4));
+
+  /* field x month heatmap */
+  var months=appMonths(year),fields=store.fields.slice();
+  var grid=fields.map(function(f){
+    return months.map(function(mm){return monthWork(f.id,mm.y,mm.m);});
+  });
+  var maxKg=0;grid.forEach(function(r){r.forEach(function(c){if(c.kg>maxKg)maxKg=c.kg;});});
+  var nowKey=today().slice(0,7);
+  var t=el("table","hm"),thead=el("thead"),hr=el("tr");
+  var th0=el("th","f");th0.appendChild(el("span",null,"圃場 / Field"));hr.appendChild(th0);
+  months.forEach(function(mm){hr.appendChild(el("th",null,mm.m+"月"));});
+  hr.appendChild(el("th","tot","kg"));
+  thead.appendChild(hr);t.appendChild(thead);
+  var tb=el("tbody");
+  fields.forEach(function(f,i){
+    var tr=el("tr",isApplied(f)?null:"un"),th=el("th","f");
+    th.appendChild(el("span","ja",f.ja||f.id));th.appendChild(el("span","en",f.id+(f.en?" · "+f.en:"")));
+    tr.appendChild(th);
+    var sum=0;
+    grid[i].forEach(function(c,j){
+      var mm=months[j],key=mm.y+"-"+p2(mm.m),cls="",lvl="作業なし / no work";
+      if(c.kg>0){var r=c.kg/(maxKg||1);cls=r>0.66?"h3":r>0.33?"h2":"h1";lvl="収穫 "+fmtKg(c.kg)+" kg";}
+      else if(c.text){cls="w1";lvl="作業あり / work recorded";}
+      else if(key>nowKey)cls="gap";
+      sum+=c.kg;
+      var td=el("td",cls);
+      td.setAttribute("aria-label",(f.ja||f.id)+" "+mm.y+"年"+mm.m+"月: "+(c.text||"記録なし")+(c.kg?" "+fmtKg(c.kg)+"kg":""));
+      td.dataset.tipT=(f.ja||f.id)+" · "+mm.y+"年"+mm.m+"月";
+      td.dataset.tipB=(c.text?c.text.split("&").join("・"):"記録なし / No record")+"\n"+lvl;
+      tr.appendChild(td);
+    });
+    tr.appendChild(el("td","tot",sum?fmtKg(sum):"–"));
+    tb.appendChild(tr);
+  });
+  t.appendChild(tb);
+  var hw=document.getElementById("ovHeat");hw.textContent="";hw.appendChild(t);
+  var lg=document.getElementById("ovLegend");lg.textContent="";
+  [["","記録なし / None"],["gap","これから / Upcoming"],["w1","作業あり / Work"],["h1","収穫 少 / Harvest, low"],["h2","中 / mid"],["h3","多 / high (max "+fmtKg(maxKg)+" kg)"]].forEach(function(x){
+    var sp=el("span");sp.appendChild(x[0]?el("i",x[0]):el("i"));sp.appendChild(document.createTextNode(x[1]));lg.appendChild(sp);
+  });
+
+  /* issues */
+  var ib=document.getElementById("ovIssues");ib.textContent="";
+  if(!issues.length){
+    var ok=el("div","issue ok");ok.innerHTML=ICON_OK;
+    var tx=el("div");tx.appendChild(el("span",null,"この年度の記録に抜けは見つかりませんでした。"));
+    tx.appendChild(el("span","en","Nothing missing in this year's records."));ok.appendChild(tx);ib.appendChild(ok);
+  }
+  issues.slice(0,8).forEach(function(x){
+    var r=el("div","issue");r.innerHTML=ICON_WARN;
+    var tx=el("div");tx.appendChild(el("span",null,x.ja));tx.appendChild(el("span","en",x.en));
+    r.appendChild(tx);ib.appendChild(r);
+  });
+  if(issues.length>8)ib.appendChild(el("p","hint","…ほか "+(issues.length-8)+" 件 / "+(issues.length-8)+" more — 台帳タブの申請書書き出しで全件を確認できます"));
+
+  /* recent */
+  var all=store.logs.map(function(o){return {k:"log",o:o};})
+    .concat(store.procs.map(function(o){return {k:"proc",o:o};}))
+    .concat(store.grades.map(function(o){return {k:"grade",o:o};}))
+    .concat(store.cleans.map(function(o){return {k:"clean",o:o};}));
+  all.sort(function(a,b){
+    if(a.o.date===b.o.date)return (b.o.updatedAt||0)-(a.o.updatedAt||0);
+    return a.o.date<b.o.date?1:-1;
+  });
+  var rb=document.getElementById("ovRecent");rb.textContent="";
+  if(!all.length){var e=el("p","empty");e.appendChild(el("span",null,"まだ記録がありません。スマホから入力してください。"));
+    e.appendChild(el("br"));e.appendChild(el("span","en","No records yet — enter them from a phone."));rb.appendChild(e);}
+  all.slice(0,6).forEach(function(x){
+    var c=x.k==="log"?logCard(x.o):x.k==="proc"?procCard(x.o):x.k==="clean"?cleanCard(x.o):gradeCard(x.o);
+    var d=el("div","sub",fmtDate(x.o.date));c.insertBefore(d,c.firstChild);
+    d.style.gridColumn="1/-1";d.style.fontWeight="700";
+    rb.appendChild(c);
+  });
+}
+document.getElementById("ovYear").onchange=renderOverview;
+document.getElementById("ovAll").onclick=function(){showView("list");};
+(function(){
+  var tip=document.getElementById("hmTip"),heat=document.getElementById("ovHeat");
+  heat.addEventListener("mousemove",function(e){
+    var td=e.target.closest&&e.target.closest("td[data-tip-t]");
+    if(!td){tip.classList.remove("on");return;}
+    tip.textContent="";tip.appendChild(el("b",null,td.dataset.tipT));
+    td.dataset.tipB.split("\n").forEach(function(line){tip.appendChild(el("div",null,line));});
+    var x=e.clientX+14,y=e.clientY+14,w=tip.offsetWidth,h=tip.offsetHeight;
+    if(x+w>window.innerWidth-8)x=e.clientX-w-14;
+    if(y+h>window.innerHeight-8)y=e.clientY-h-14;
+    tip.style.left=x+"px";tip.style.top=y+"px";tip.classList.add("on");
+  });
+  heat.addEventListener("mouseleave",function(){tip.classList.remove("on");});
+})();
+/* phones open on data entry, desktops on the overview */
+if(DESKTOP.matches)showView("overview");
+DESKTOP.addEventListener&&DESKTOP.addEventListener("change",function(){
+  if(!DESKTOP.matches&&currentView==="overview")showView("entry");
+});
+document.addEventListener("keydown",function(e){
+  if((e.ctrlKey||e.metaKey)&&!e.altKey&&(e.key==="s"||e.key==="S")){
+    var sb=document.getElementById("savebar");
+    if(sb.classList.contains("hidden"))return;
+    e.preventDefault();
+    document.getElementById("save").click();
+  }
+});
 
 Array.prototype.forEach.call(document.querySelectorAll(".tab"),function(t){
   t.onclick=function(){showView(t.dataset.view);};

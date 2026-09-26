@@ -1,7 +1,7 @@
 /* Offline shell for 悠三堂 有機JAS記録.
    The app page and its fonts are cached so the app opens with no signal;
    /api requests always go to the network (records queue inside the page). */
-const VERSION = "v4";
+const VERSION = "v5";
 const SHELL = ["/", "/index.html", "/manifest.webmanifest", "/icon.svg"];
 
 self.addEventListener("install", (e) => {
