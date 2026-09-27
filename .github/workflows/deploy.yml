@@ -13,8 +13,13 @@ jobs:
       CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
     steps:
       - name: Skip when the Cloudflare token is not set yet
-        if: env.CLOUDFLARE_API_TOKEN == ''
+        if: env.CLOUDFLARE_API_TOKEN == '' && github.event_name == 'push'
         run: echo "CLOUDFLARE_API_TOKEN is not set in the repository secrets; skipping deploy."
+      - name: Stop a manual run when the Cloudflare token is not set
+        if: env.CLOUDFLARE_API_TOKEN == '' && github.event_name != 'push'
+        run: |
+          echo "::error::CLOUDFLARE_API_TOKEN が未登録です。Settings → Secrets and variables → Actions に登録してください。"
+          exit 1
       - uses: actions/checkout@v4
         if: env.CLOUDFLARE_API_TOKEN != ''
       - uses: actions/setup-node@v4
