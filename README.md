@@ -39,7 +39,21 @@ Cloudflare Workers + D1 で動き、圏外でも記録できます(電波が戻�
 - パソコンの入力画面では `Ctrl`+`S`(Macは `⌘`+`S`)で記録できます。
 
 ## 更新するとき
-GitHub のファイルを更新すれば、Cloudflare が自動で再デプロイします。
+本番のWorker名は **`kiroku`** です(`wrangler.toml` の `name`)。
+
+**GitHub から自動で反映させる設定(初回のみ)**
+1. Cloudflare ダッシュボード → **Workers & Pages** → **kiroku** → **Settings** → **Build**
+2. **Git repository** の「Connect」で `Yusandonatural/yusando_jas` を選び、ブランチは **main**
+3. ビルドコマンドは空欄、デプロイコマンドは `npx wrangler deploy` のまま保存
+
+これで main が更新されるたびに kiroku が自動で再デプロイされます。
+
+**手元のパソコンから反映する場合**
+```
+npm install
+npx wrangler login
+npx wrangler deploy
+```
 
 ## Googleカレンダーに表示する
 台帳タブ →「Googleカレンダーに表示する」のURLをコピーし、
