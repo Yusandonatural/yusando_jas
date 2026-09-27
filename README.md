@@ -48,6 +48,14 @@ Cloudflare Workers + D1 で動き、圏外でも記録できます(電波が戻�
 
 これで main が更新されるたびに kiroku が自動で再デプロイされます。
 
+**GitHub Actions で反映する場合(上の設定ができないとき)**
+1. Cloudflare → 右上の人のアイコン → **My Profile** → **API Tokens** → **Create Token** → 「**Edit Cloudflare Workers**」の **Use template** → そのまま **Continue to summary** → **Create Token** → 表示された文字列をコピー
+2. GitHub のこのリポジトリ → **Settings** → **Secrets and variables** → **Actions** → **New repository secret**
+   - Name: `CLOUDFLARE_API_TOKEN` / Secret: 1でコピーした文字列 → **Add secret**
+3. **Actions** タブ → 「Deploy to Cloudflare (kiroku)」→ **Run workflow**
+
+以後は main が更新されるたびに自動で反映されます(`.github/workflows/deploy.yml`)。
+
 **手元のパソコンから反映する場合**
 ```
 npm install
